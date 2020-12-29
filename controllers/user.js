@@ -25,9 +25,6 @@ exports.hasAuthorization = (req, res, next) => {
 
     const authorized = sameUser || adminUser;
 
-    // console.log("req.profile ", req.profile, " req.auth ", req.auth);
-    // console.log("SAMEUSER", sameUser, "ADMINUSER", adminUser);
-
     if (!authorized) {
         return res.status(403).json({
             error: 'User is not authorized to perform this action'
@@ -53,21 +50,6 @@ exports.getUser = (req, res) => {
     return res.json(req.profile);
 };
 
-// exports.updateUser = (req, res, next) => {
-//     let user = req.profile;
-//     user = _.extend(user, req.body); // extend - mutate the source object
-//     user.updated = Date.now();
-//     user.save(err => {
-//         if (err) {
-//             return res.status(400).json({
-//                 error: "You are not authorized to perform this action"
-//             });
-//         }
-//         user.hashed_password = undefined;
-//         user.salt = undefined;
-//         res.json({ user });
-//     });
-// };
 
 exports.updateUser = (req, res, next) => {
     let form = new formidable.IncomingForm();
